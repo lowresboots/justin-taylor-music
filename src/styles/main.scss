@@ -85,6 +85,29 @@
           opacity: 0.7;
         }
       }
+
+      .spotify-link {
+        position: relative;
+        cursor: default; // Change cursor to default instead of pointer
+        
+        &:hover {
+          opacity: 1; // Keep the opacity the same on hover (no hover effect)
+        }
+
+        &:hover::after {
+          content: "Coming soon!";
+          position: absolute;
+          top: -40px;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #111;
+          color: #f9f8f4;
+          padding: 5px 10px;
+          border-radius: 5px;
+          font-size: 1rem;
+          white-space: nowrap;
+        }
+      }
     }
     
     .scroll-prompt {
