@@ -121,7 +121,7 @@ body {
   }
 }
 
-// Book a Lesson section styles - moved outside of #hero
+// Book a Lesson section styles
 #book-lesson {
   background-color: #f9f8f4;
   text-align: center;
@@ -146,6 +146,59 @@ body {
   }
 
   .book-now-btn {
+    display: inline-block;
+    background-color: #111;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 1rem 3rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    text-transform: uppercase;
+
+    &:hover {
+      background-color: #333;
+    }
+  }
+}
+
+// Merch section styles - Now correctly placed outside of #book-lesson
+#merch {
+  background-color: #f9f8f4;
+  text-align: center;
+
+  .merch-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 5rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    color: #111;
+  }
+
+  .merch-description {
+    font-size: 1.8rem;
+    margin-bottom: 3rem;
+    color: #111;
+  }
+
+  .product-image {
+    margin-bottom: 3rem;
+
+    .mug-image {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      margin-right: 50px;
+    }
+  }
+
+  .shop-now-btn {
     display: inline-block;
     background-color: #111;
     color: #fff;
