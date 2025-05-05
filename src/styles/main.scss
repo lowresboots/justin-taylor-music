@@ -32,6 +32,30 @@ body {
   align-items: center;
 }
 
+// Shared button mixin
+@mixin action-button {
+  display: inline-block;
+  width: 260px; // set a strict width
+  height: 60px; // enforce vertical consistency
+  background-color: #111;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 1rem 3rem; // padding still matters for text alignment
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: normal;
+  &:hover {
+    background-color: #333;
+  }
+}
+
 // Hero section styles
 #hero {
   text-align: center;
@@ -146,21 +170,7 @@ body {
   }
 
   .book-now-btn {
-    display: inline-block;
-    background-color: #111;
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    padding: 1rem 3rem;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-    text-transform: uppercase;
-
-    &:hover {
-      background-color: #333;
-    }
+    @include action-button;
   }
 }
 
@@ -199,20 +209,62 @@ body {
   }
 
   .shop-now-btn {
-    display: inline-block;
-    background-color: #111;
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    padding: 1rem 3rem;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-    text-transform: uppercase;
+    @include action-button;
+  }
+}
 
-    &:hover {
-      background-color: #333;
+// Contact section styles
+#contact {
+  background-color: #f9f8f4;
+  text-align: center;
+  
+  .contact-content {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .section-title {
+    font-size: 5rem;
+    font-weight: 900;
+    margin-bottom: 3rem;
+    color: #111;
+  }
+  
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    
+    .form-group {
+      width: 100%;
+      
+      input, textarea {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.2rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        
+        &:focus {
+          outline: none;
+          border-color: #111;
+        }
+      }
+      
+      textarea {
+        height: 200px;
+        resize: none;
+        overflow-y: auto;
+      }
+    }
+    
+    .send-message-btn {
+      @include action-button;
+      align-self: center;
+      margin-top: 1rem;
     }
   }
 }
