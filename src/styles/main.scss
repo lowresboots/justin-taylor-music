@@ -5,11 +5,35 @@
   box-sizing: border-box;
 }
 
+// Scrollbar styling
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.6;
   color: #111;
   background-color: #f9f8f4;
+  
+  // Webkit browsers (Chrome, Safari, newer Edge)
+  &::-webkit-scrollbar {
+    width: 12px; // Width of the scrollbar
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #f9f8f4; // Same as the site background
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #111; // Same as button color
+    border-radius: 6px; // Rounded corners
+    border: 3px solid #f9f8f4; // Creates padding effect
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: #333; // Same as button hover color
+  }
+  
+  // Firefox
+  scrollbar-width: thin;
+  scrollbar-color: #111 #f9f8f4; // thumb and track color
 }
 
 .container {
@@ -19,6 +43,29 @@ body {
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  
+  // Webkit browsers
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #f9f8f4;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #111;
+    border-radius: 6px;
+    border: 3px solid #f9f8f4;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: #333;
+  }
+  
+  // Firefox
+  scrollbar-width: thin;
+  scrollbar-color: #111 #f9f8f4;
 }
 
 // Section styles
@@ -51,6 +98,7 @@ body {
   text-transform: uppercase;
   text-align: center;
   line-height: normal;
+  
   &:hover {
     background-color: #333;
   }
@@ -174,7 +222,7 @@ body {
   }
 }
 
-// Merch section styles - Now correctly placed outside of #book-lesson
+// Merch section styles
 #merch {
   background-color: #f9f8f4;
   text-align: center;
