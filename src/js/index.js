@@ -46,4 +46,48 @@ document.addEventListener('DOMContentLoaded', () => {
       contactForm.reset();
     });
   }
+  
+  // Navigation functionality
+  const sections = document.querySelectorAll(".section");
+  const navLinks = document.querySelectorAll(".nav-link");
+  
+  // Set active link on page load
+  setActiveNavLink();
+  
+  // Update active link on scroll
+  window.addEventListener("scroll", setActiveNavLink);
+  
+  // Add smooth scrolling to nav links
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const targetId = this.getAttribute('href');
+      const targetSection = document.querySelector(targetId);
+      
+      window.scrollTo({
+        top: targetSection.offsetTop,
+        behavior: 'smooth'
+      });
+    });
+  });
+  
+  // Function to set active nav link
+  function setActiveNavLink() {
+    let current = "";
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      if (window.pageYOffset >= sectionTop) {
+        current = section.getAttribute("id");
+      }
+    });
+    
+    navLinks.forEach(link => {
+      link.classList.remove("active");
+      if (link.getAttribute("href") === `#${current}`) {
+        link.classList.add("active");
+      }
+    });
+  }
 });
