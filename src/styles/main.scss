@@ -12,7 +12,7 @@ body {
   background-color: #f9f8f4;
 }
 
-// Container with gradient fade mask
+// Container with improved gradient fade mask
 .container {
   position: relative;
   width: 100%;
@@ -22,22 +22,23 @@ body {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   
-  // Gradient fade mask
+  // Strengthened gradient fade mask
   &::before {
     content: '';
     position: fixed;
     top: 0;
     left: 0;
-    right: 0; // Ensures it covers full width accounting for scrollbar
+    right: 0;
     width: calc(100% - 12px); // Adjust for scrollbar width
-    height: 90px; // Slightly taller than navbar for a smoother fade
+    height: 110px; // Make it slightly taller
     background: linear-gradient(to bottom, 
-                  rgba(249, 248, 244, 1) 0%,
-                  rgba(249, 248, 244, 0.95) 40%, 
-                  rgba(249, 248, 244, 0.8) 60%, 
-                  rgba(249, 248, 244, 0) 100%);
-    pointer-events: none; // Let clicks pass through to content below
-    z-index: 998; // Just beneath navbar
+                rgba(249, 248, 244, 1) 0%,
+                rgba(249, 248, 244, 1) 50%, // Solid background for first half
+                rgba(249, 248, 244, 0.9) 70%, 
+                rgba(249, 248, 244, 0.7) 80%,
+                rgba(249, 248, 244, 0) 100%);
+    pointer-events: none;
+    z-index: 998;
   }
   
   // Webkit scrollbar styling
@@ -64,15 +65,15 @@ body {
   scrollbar-color: #111 #f9f8f4;
 }
 
-// Navbar styling
+// Navbar
 #navbar {
   position: fixed;
   top: 0;
   left: 0;
-  width: calc(100% - 12px); // Avoid covering scrollbar
-  background-color: transparent; // Fully transparent as the mask handles the background
-  z-index: 999; // Above the gradient mask
-  padding: 1.5rem 2rem; // Slightly more vertical padding
+  width: calc(100% - 12px);
+  background-color: transparent;
+  z-index: 999;
+  padding: 1.5rem 2rem;
   display: flex;
   justify-content: center;
   
@@ -86,16 +87,36 @@ body {
       font-size: 1.5rem;
       color: #111;
       text-decoration: none;
-      border-bottom: 2px solid transparent;
+      position: relative;
       padding-bottom: 4px;
-      transition: border-color 0.3s;
       
-      &.active {
-        border-color: #111;
+      // Create underline with pseudo-element for better animation control
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #111;
+        transform: scaleX(0); // Start with zero width
+        transform-origin: bottom center;
+        transition: transform 0.4s ease-out; // Smooth transition for transform
+        opacity: 0; // Start fully transparent
+        transition: transform 0.4s ease-out, opacity 0.3s ease; // Animate both properties
       }
       
-      &:hover {
-        border-color: rgba(17, 17, 17, 0.5);
+      &:focus {
+        outline: none;
+      }
+      
+      &.active {
+        transform: translateY(-2px); // Subtle lift effect
+        
+        &::after {
+          transform: scaleX(1); // Expand to full width
+          opacity: 1; // Fade in to full opacity
+        }
       }
     }
   }
@@ -137,16 +158,20 @@ body {
   }
 }
 
-// Hero section styles
+// Hero section styles - updated for better centering
 #hero {
   text-align: center;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // Centers content vertically
 
   .logo-container {
     display: flex;
     align-items: flex-start;
     justify-content: center;
     margin-bottom: 1rem;
+    margin-top: 9rem; // Push content down slightly
 
     .logo {
       margin-right: 1.5rem;
@@ -216,13 +241,6 @@ body {
         white-space: nowrap;
       }
     }
-  }
-
-  .scroll-prompt {
-    position: absolute;
-    bottom: 3rem;
-    font-size: 1.5rem;
-    font-weight: 500;
   }
 }
 
