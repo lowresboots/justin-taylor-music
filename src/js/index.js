@@ -5,89 +5,79 @@ import '../styles/main.scss';
 import guitarSvg from '../assets/images/cguitar_cleaned.svg';
 import mugImg from '../assets/images/mug.png';
 
-// Load the guitar SVG into the DOM when the page loads
 document.addEventListener('DOMContentLoaded', () => {
-  // Guitar logo injection
+  // Inject guitar logo
   const logoContainer = document.querySelector('.logo');
   if (logoContainer) {
-    // Create an img element for the SVG
     const img = document.createElement('img');
     img.src = guitarSvg;
     img.alt = 'Justin Taylor Music Guitar Logo';
     img.className = 'guitar-logo';
-
-    // Append to the logo container
     logoContainer.appendChild(img);
   }
 
-  // Mug image injection
+  // Inject mug image
   const mugImage = document.querySelector('.mug-image');
   if (mugImage) {
     mugImage.src = mugImg;
   }
-  
-  // Contact form functionality
+
+  // Handle contact form
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const message = document.getElementById('message').value;
-      
-      // Create the mailto URL with the form data
       const mailtoUrl = `mailto:justintaylormusic888@gmail.com?subject=Message from ${name}&body=From: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0A${message}`;
-      
-      // Open the user's email client
       window.location.href = mailtoUrl;
-      
-      // Reset the form
       contactForm.reset();
     });
   }
-  
-  // Navigation functionality
-  const sections = document.querySelectorAll(".section");
-  const navLinks = document.querySelectorAll(".nav-link");
-  
-  // Set active link on page load
-  setActiveNavLink();
-  
-  // Update active link on scroll
-  window.addEventListener("scroll", setActiveNavLink);
-  
-  // Add smooth scrolling to nav links
+
+  // Navigation logic
+  const container = document.querySelector('.container');
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  function setActiveNavLink() {
+    let current = '';
+    const scrollY = container.scrollTop;
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      if (scrollY >= sectionTop - 100) {
+        current = section.getAttribute('id');
+      }
+    });
+    
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  // Set up scroll event listener
+  container.addEventListener('scroll', setActiveNavLink);
+
+  // Handle nav link clicks
   navLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
+    link.addEventListener('click', function (e) {
       e.preventDefault();
-      
       const targetId = this.getAttribute('href');
       const targetSection = document.querySelector(targetId);
-      
-      window.scrollTo({
+      container.scrollTo({
         top: targetSection.offsetTop,
         behavior: 'smooth'
       });
     });
   });
-  
-  // Function to set active nav link
-  function setActiveNavLink() {
-    let current = "";
-    
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 100;
-      if (window.pageYOffset >= sectionTop) {
-        current = section.getAttribute("id");
-      }
-    });
-    
-    navLinks.forEach(link => {
-      link.classList.remove("active");
-      if (link.getAttribute("href") === `#${current}`) {
-        link.classList.add("active");
-      }
-    });
-  }
+
+  // Initialize active state with a small delay to ensure DOM is ready
+  setTimeout(() => {
+    setActiveNavLink();
+  }, 100);
 });
