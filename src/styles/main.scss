@@ -368,6 +368,26 @@ body {
   }
 }
 
+// Remove focus outlines from buttons
+button,
+.book-now-btn,
+.shop-now-btn,
+.send-message-btn {
+  &:focus {
+    outline: none;
+  }
+}
+
+// Disable hover effects on touch devices
+@media (hover: none) {
+  .book-now-btn:hover,
+  .shop-now-btn:hover,
+  .send-message-btn:hover {
+    background-color: #111 !important;
+    opacity: 1 !important;
+  }
+}
+
 // Mobile adjustments
 @media (max-width: 768px) {
   html, body {
