@@ -1,1 +1,21 @@
-node_modules/
+# Dependencies
+/node_modules
+
+# Build files
+/dist
+bundle.js
+*.map
+
+# Environment files
+.env
+.env.*
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
