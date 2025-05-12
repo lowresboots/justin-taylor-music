@@ -386,6 +386,11 @@ button,
     background-color: #111 !important;
     opacity: 1 !important;
   }
+  
+  // Add social links hover suppression
+  #hero .social-links a:hover {
+    opacity: 1 !important;
+  }
 }
 
 // Mobile adjustments
