@@ -12,7 +12,7 @@ body {
   background-color: #f9f8f4;
 }
 
-// Container with improved gradient fade mask
+// Improved container with gradient fade mask
 .container {
   position: relative;
   width: 100%;
@@ -22,50 +22,35 @@ body {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   
-  // Strengthened gradient fade mask
+  // Hide scrollbar
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  // Gradient fade mask
   &::before {
     content: '';
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    width: calc(100% - 12px); // Adjust for scrollbar width
-    height: 110px; // Make it slightly taller
+    width: calc(100% - 12px);
+    height: 90px;
     background: linear-gradient(to bottom, 
                 rgba(249, 248, 244, 1) 0%,
-                rgba(249, 248, 244, 1) 50%, // Solid background for first half
+                rgba(249, 248, 244, 1) 50%,
                 rgba(249, 248, 244, 0.9) 70%, 
                 rgba(249, 248, 244, 0.7) 80%,
                 rgba(249, 248, 244, 0) 100%);
     pointer-events: none;
     z-index: 998;
+    transition: opacity 0.3s;
   }
-  
-  // Webkit scrollbar styling
-  &::-webkit-scrollbar {
-    width: 12px;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: #f9f8f4;
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background: #111;
-    border-radius: 6px;
-    border: 3px solid #f9f8f4;
-  }
-  
-  &::-webkit-scrollbar-thumb:hover {
-    background: #333;
-  }
-  
-  // Firefox scrollbar
-  scrollbar-width: thin;
-  scrollbar-color: #111 #f9f8f4;
 }
 
-// Navbar
+// Refined navbar styling
 #navbar {
   position: fixed;
   top: 0;
@@ -99,11 +84,10 @@ body {
         width: 100%;
         height: 2px;
         background-color: #111;
-        transform: scaleX(0); // Start with zero width
+        transform: scaleX(0);
         transform-origin: bottom center;
-        transition: transform 0.4s ease-out; // Smooth transition for transform
-        opacity: 0; // Start fully transparent
-        transition: transform 0.4s ease-out, opacity 0.3s ease; // Animate both properties
+        opacity: 0;
+        transition: transform 0.4s ease-out, opacity 0.3s ease;
       }
       
       &:focus {
@@ -111,11 +95,11 @@ body {
       }
       
       &.active {
-        transform: translateY(-2px); // Subtle lift effect
+        transform: translateY(-2px);
         
         &::after {
-          transform: scaleX(1); // Expand to full width
-          opacity: 1; // Fade in to full opacity
+          transform: scaleX(1);
+          opacity: 1;
         }
       }
     }
@@ -133,45 +117,47 @@ body {
   align-items: center;
 }
 
-// Shared button mixin
+// Improved shared button mixin
 @mixin action-button {
   display: inline-block;
-  width: 260px; // set a strict width
-  height: 60px; // enforce vertical consistency
+  width: 260px;
+  height: 60px;
   background-color: #111;
   color: #fff;
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 1px;
-  padding: 1rem 3rem; // padding still matters for text alignment
+  padding: 1rem 3rem;
   border-radius: 8px;
   border: none;
   cursor: pointer;
   text-decoration: none;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, opacity 0.3s;
   text-transform: uppercase;
   text-align: center;
   line-height: normal;
   
   &:hover {
-    background-color: #333;
+    background-color: #222;
+    opacity: 0.9;
   }
 }
 
-// Hero section styles - updated for better centering
+// Hero section styles
 #hero {
   text-align: center;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center; // Centers content vertically
+  justify-content: center;
 
   .logo-container {
     display: flex;
     align-items: flex-start;
     justify-content: center;
     margin-bottom: 1rem;
-    margin-top: 9rem; // Push content down slightly
+    margin-top: 2rem;
+    padding-top: 10vh;
 
     .logo {
       margin-right: 1.5rem;
@@ -348,8 +334,8 @@ body {
         font-family: 'Helvetica Neue', Arial, sans-serif;
         
         &:focus {
-          outline: none;
-          border-color: #111;
+          outline: 2px solid rgba(17, 17, 17, 0.5);
+          outline-offset: -1px;
         }
       }
       
@@ -368,6 +354,16 @@ body {
   }
 }
 
+// Disable hover effects on touch devices
+@media (hover: none) {
+  .book-now-btn:hover,
+  .shop-now-btn:hover,
+  .send-message-btn:hover {
+    background-color: #111 !important;
+    opacity: 1 !important;
+  }
+}
+
 // Mobile adjustments
 @media (max-width: 768px) {
   html, body {
@@ -379,13 +375,6 @@ body {
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     
-    // Hide scrollbar on mobile
-    scrollbar-width: none; // Firefox
-    -ms-overflow-style: none; // IE/Edge
-    &::-webkit-scrollbar {
-      display: none; // Chrome/Safari/Opera
-    }
-    
     &::before {
       width: 100%;
       height: 90px;
@@ -394,9 +383,13 @@ body {
   }
   
   .section {
+    min-height: 100svh; // Using svh for better handling of mobile browser chrome
     padding: 6rem 1.5rem 2rem;
     scroll-snap-align: start;
-    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   
   #navbar {
@@ -473,7 +466,7 @@ body {
     }
   }
   
-  // Reduced size for section titles (except hero)
+  // Section titles
   #book-lesson .section-title,
   #merch .section-title,
   #contact .section-title {
@@ -482,61 +475,46 @@ body {
     margin-bottom: 1rem;
   }
   
-  // Consistent button styling for all action buttons
+  // Buttons
   .book-now-btn,
   .shop-now-btn,
   .send-message-btn {
-    width: 240px; // Fixed width for mobile
-    height: 54px; // Fixed height for mobile
+    width: 90%;
+    max-width: 280px;
+    height: 60px;
     font-size: 1.4rem;
-    padding: 0; // Remove padding since we're using fixed height/width
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1.5rem auto 0; // Center the button
+    padding: 1rem 1.5rem;
+    margin-top: 1.5rem;
   }
   
-  #book-lesson {
-    .lesson-content {
-      width: 90%;
-    }
-    
-    .lesson-description {
-      font-size: 1.4rem;
-    }
+  // Book Section
+  #book-lesson .lesson-description,
+  #merch .merch-description {
+    font-size: 1.4rem;
   }
   
-  #merch {
-    .merch-description {
-      font-size: 1.4rem;
-    }
-    
-    .product-image .mug-image {
-      max-width: 220px;
-      margin: 0 auto;
-      display: block;
-    }
+  #merch .product-image .mug-image {
+    max-width: 220px;
+    margin: 0 auto;
+    display: block;
   }
   
-  #contact {
-    .contact-content {
-      width: 90%;
-    }
+  #contact .contact-content {
+    width: 90%;
+  }
+  
+  #contact .contact-form input,
+  #contact .contact-form textarea {
+    font-size: 1rem;
     
-    .contact-form {
-      input, textarea {
-        font-size: 1rem;
-        
-        &:focus {
-          outline: 2px solid rgba(17, 17, 17, 0.5);
-          outline-offset: -1px;
-        }
-      }
+    &:focus {
+      outline: 2px solid rgba(17, 17, 17, 0.5);
+      outline-offset: -1px;
     }
   }
 }
 
-// Extra small devices
+// Extra-small device tweaks
 @media (max-width: 370px) {
   #navbar ul {
     gap: 0.5rem;
@@ -555,19 +533,9 @@ body {
     padding-top: 5rem;
   }
   
-  // Even smaller titles for tiny screens
   #book-lesson .section-title,
   #merch .section-title,
   #contact .section-title {
     font-size: 2rem;
-  }
-  
-  // Slightly smaller buttons for very small screens
-  .book-now-btn,
-  .shop-now-btn,
-  .send-message-btn {
-    width: 220px;
-    height: 50px;
-    font-size: 1.3rem;
   }
 }
