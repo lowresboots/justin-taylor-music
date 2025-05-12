@@ -372,9 +372,16 @@ body {
   }
   
   .container {
-    height: 100svh;
+    height: 100vh;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
+    
+    // Hide scrollbar on mobile
+    scrollbar-width: none; // Firefox
+    -ms-overflow-style: none; // IE/Edge
+    &::-webkit-scrollbar {
+      display: none; // Chrome/Safari/Opera
+    }
     
     &::before {
       width: 100%;
@@ -384,13 +391,9 @@ body {
   }
   
   .section {
-    min-height: 100svh;
     padding: 6rem 1.5rem 2rem;
     scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
   }
   
   #navbar {
@@ -467,7 +470,7 @@ body {
     }
   }
   
-  // Section titles
+  // Reduced size for section titles (except hero)
   #book-lesson .section-title,
   #merch .section-title,
   #contact .section-title {
@@ -476,57 +479,61 @@ body {
     margin-bottom: 1rem;
   }
   
-  // Buttons
+  // Consistent button styling for all action buttons
   .book-now-btn,
   .shop-now-btn,
   .send-message-btn {
-    width: 90%;
-    max-width: 280px;
-    height: 60px;
+    width: 240px; // Fixed width for mobile
+    height: 54px; // Fixed height for mobile
     font-size: 1.4rem;
-    padding: 1rem 1.5rem;
-    margin-top: 1.5rem;
+    padding: 0; // Remove padding since we're using fixed height/width
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5rem auto 0; // Center the button
   }
   
-  // Book Section
-  #book-lesson .lesson-description,
-  #merch .merch-description {
-    font-size: 1.4rem;
-  }
-  
-  #merch .product-image .mug-image {
-    max-width: 220px;
-    margin: 0 auto;
-    display: block;
-  }
-  
-  #contact .contact-content {
-    width: 90%;
-  }
-  
-  #contact .contact-form input,
-  #contact .contact-form textarea {
-    font-size: 1rem;
+  #book-lesson {
+    .lesson-content {
+      width: 90%;
+    }
     
-    &:focus {
-      outline: 2px solid rgba(17, 17, 17, 0.5);
-      outline-offset: -1px;
+    .lesson-description {
+      font-size: 1.4rem;
     }
   }
   
-  // Specific padding override for mobile spacing issues
-  #hero.section,
-  #contact.section {
-    padding-top: 3rem !important;
+  #merch {
+    .merch-description {
+      font-size: 1.4rem;
+    }
+    
+    .product-image .mug-image {
+      max-width: 220px;
+      margin: 0 auto;
+      display: block;
+    }
   }
-
-  #hero .logo-container {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
+  
+  #contact {
+    .contact-content {
+      width: 90%;
+    }
+    
+    .contact-form {
+      input, textarea {
+        font-size: 1rem;
+        
+        &:focus {
+          outline: 2px solid rgba(17, 17, 17, 0.5);
+          outline-offset: -1px;
+        }
+      }
+    }
   }
 }
 
-// Extra-small device tweaks
+// Extra small devices
 @media (max-width: 370px) {
   #navbar ul {
     gap: 0.5rem;
@@ -545,39 +552,19 @@ body {
     padding-top: 5rem;
   }
   
+  // Even smaller titles for tiny screens
   #book-lesson .section-title,
   #merch .section-title,
   #contact .section-title {
     font-size: 2rem;
   }
-}
-
-// Optimize for print
-@media print {
-  .container {
-    height: auto;
-    overflow: visible;
-    scroll-snap-type: none;
-  }
   
-  #navbar {
-    display: none;
-  }
-  
-  .section {
-    page-break-inside: avoid;
-    min-height: auto;
-  }
-}
-
-// Respect user preference for reduced motion
-@media (prefers-reduced-motion: reduce) {
-  * {
-    transition-duration: 0.001ms !important;
-    animation-duration: 0.001ms !important;
-  }
-  
-  .container {
-    scroll-behavior: auto;
+  // Slightly smaller buttons for very small screens
+  .book-now-btn,
+  .shop-now-btn,
+  .send-message-btn {
+    width: 220px;
+    height: 50px;
+    font-size: 1.3rem;
   }
 }
