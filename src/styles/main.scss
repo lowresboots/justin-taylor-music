@@ -12,47 +12,60 @@ body {
   background-color: #f9f8f4;
 }
 
-// Improved container with gradient fade mask
+// Container with improved gradient fade mask
 .container {
   position: relative;
   width: 100%;
   max-width: 100%;
-  height: 100svh;
-  min-height: 100svh;
+  height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch; // Ensures smooth scrolling on iOS
   
-  // Hide scrollbar
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  
-  // Gradient fade mask
+  // Strengthened gradient fade mask
   &::before {
     content: '';
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    width: calc(100% - 12px);
-    height: 90px;
+    width: calc(100% - 12px); // Adjust for scrollbar width
+    height: 110px; // Make it slightly taller
     background: linear-gradient(to bottom, 
                 rgba(249, 248, 244, 1) 0%,
-                rgba(249, 248, 244, 1) 50%,
+                rgba(249, 248, 244, 1) 50%, // Solid background for first half
                 rgba(249, 248, 244, 0.9) 70%, 
                 rgba(249, 248, 244, 0.7) 80%,
                 rgba(249, 248, 244, 0) 100%);
     pointer-events: none;
     z-index: 998;
-    transition: opacity 0.3s;
   }
+  
+  // Webkit scrollbar styling
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #f9f8f4;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #111;
+    border-radius: 6px;
+    border: 3px solid #f9f8f4;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: #333;
+  }
+  
+  // Firefox scrollbar
+  scrollbar-width: thin;
+  scrollbar-color: #111 #f9f8f4;
 }
 
-// Refined navbar styling
+// Navbar
 #navbar {
   position: fixed;
   top: 0;
@@ -77,6 +90,7 @@ body {
       position: relative;
       padding-bottom: 4px;
       
+      // Create underline with pseudo-element for better animation control
       &::after {
         content: '';
         position: absolute;
@@ -85,10 +99,11 @@ body {
         width: 100%;
         height: 2px;
         background-color: #111;
-        transform: scaleX(0);
+        transform: scaleX(0); // Start with zero width
         transform-origin: bottom center;
-        opacity: 0;
-        transition: transform 0.4s ease-out, opacity 0.3s ease;
+        transition: transform 0.4s ease-out; // Smooth transition for transform
+        opacity: 0; // Start fully transparent
+        transition: transform 0.4s ease-out, opacity 0.3s ease; // Animate both properties
       }
       
       &:focus {
@@ -96,11 +111,11 @@ body {
       }
       
       &.active {
-        transform: translateY(-2px);
+        transform: translateY(-2px); // Subtle lift effect
         
         &::after {
-          transform: scaleX(1);
-          opacity: 1;
+          transform: scaleX(1); // Expand to full width
+          opacity: 1; // Fade in to full opacity
         }
       }
     }
@@ -109,7 +124,7 @@ body {
 
 // Section styles
 .section {
-  min-height: 100svh;
+  min-height: 100vh;
   scroll-snap-align: start;
   padding: 2rem;
   display: flex;
@@ -118,47 +133,45 @@ body {
   align-items: center;
 }
 
-// Improved shared button mixin
+// Shared button mixin
 @mixin action-button {
   display: inline-block;
-  width: 260px;
-  height: 60px;
+  width: 260px; // set a strict width
+  height: 60px; // enforce vertical consistency
   background-color: #111;
   color: #fff;
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 1px;
-  padding: 1rem 3rem;
+  padding: 1rem 3rem; // padding still matters for text alignment
   border-radius: 8px;
   border: none;
   cursor: pointer;
   text-decoration: none;
-  transition: background-color 0.3s, opacity 0.3s;
+  transition: background-color 0.3s;
   text-transform: uppercase;
   text-align: center;
   line-height: normal;
   
   &:hover {
-    background-color: #222;
-    opacity: 0.9;
+    background-color: #333;
   }
 }
 
-// Hero section styles
+// Hero section styles - updated for better centering
 #hero {
   text-align: center;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; // Centers content vertically
 
   .logo-container {
     display: flex;
     align-items: flex-start;
     justify-content: center;
     margin-bottom: 1rem;
-    margin-top: 2rem;
-    padding-top: 10vh;
+    margin-top: 9rem; // Push content down slightly
 
     .logo {
       margin-right: 1.5rem;
@@ -335,8 +348,8 @@ body {
         font-family: 'Helvetica Neue', Arial, sans-serif;
         
         &:focus {
-          outline: 2px solid rgba(17, 17, 17, 0.5);
-          outline-offset: -1px;
+          outline: none;
+          border-color: #111;
         }
       }
       
@@ -352,16 +365,6 @@ body {
       align-self: center;
       margin-top: 1rem;
     }
-  }
-}
-
-// Disable hover effects on touch devices
-@media (hover: none) {
-  .book-now-btn:hover,
-  .shop-now-btn:hover,
-  .send-message-btn:hover {
-    background-color: #111 !important;
-    opacity: 1 !important;
   }
 }
 
