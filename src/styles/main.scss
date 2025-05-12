@@ -17,10 +17,12 @@ body {
   position: relative;
   width: 100%;
   max-width: 100%;
-  height: 100vh;
+  height: 100svh;
+  min-height: 100svh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; // Ensures smooth scrolling on iOS
   
   // Hide scrollbar
   scrollbar-width: none;
@@ -75,7 +77,6 @@ body {
       position: relative;
       padding-bottom: 4px;
       
-      // Create underline with pseudo-element for better animation control
       &::after {
         content: '';
         position: absolute;
@@ -108,7 +109,7 @@ body {
 
 // Section styles
 .section {
-  min-height: 100vh;
+  min-height: 100svh;
   scroll-snap-align: start;
   padding: 2rem;
   display: flex;
@@ -371,7 +372,7 @@ body {
   }
   
   .container {
-    height: 100vh;
+    height: 100svh;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     
@@ -383,7 +384,7 @@ body {
   }
   
   .section {
-    min-height: 100svh; // Using svh for better handling of mobile browser chrome
+    min-height: 100svh;
     padding: 6rem 1.5rem 2rem;
     scroll-snap-align: start;
     display: flex;
@@ -512,6 +513,17 @@ body {
       outline-offset: -1px;
     }
   }
+  
+  // Specific padding override for mobile spacing issues
+  #hero.section,
+  #contact.section {
+    padding-top: 3rem !important;
+  }
+
+  #hero .logo-container {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
 }
 
 // Extra-small device tweaks
@@ -537,5 +549,35 @@ body {
   #merch .section-title,
   #contact .section-title {
     font-size: 2rem;
+  }
+}
+
+// Optimize for print
+@media print {
+  .container {
+    height: auto;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+  
+  #navbar {
+    display: none;
+  }
+  
+  .section {
+    page-break-inside: avoid;
+    min-height: auto;
+  }
+}
+
+// Respect user preference for reduced motion
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+  }
+  
+  .container {
+    scroll-behavior: auto;
   }
 }
