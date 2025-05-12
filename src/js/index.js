@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let isScrolling = false;
 
-  // Debounce function to prevent excessive firing
+  // Debounce function with reduced delay
   function debounce(fn, delay) {
     let timeout;
     return function () {
@@ -54,14 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  // Set the active nav link based on scroll position
+  // Set the active nav link based on scroll position - more responsive
   function setActiveNavLink() {
-    // Critical fix: Don't update nav highlighting during programmatic scrolling
     if (isScrolling) return;
 
     let current = '';
     const scrollY = container.scrollTop;
-    const offset = window.innerWidth <= 768 ? 150 : 100; // Larger offset for mobile
+    // Reduced threshold from 100 to 60 for faster activation
+    const offset = window.innerWidth <= 768 ? 120 : 60;
 
     sections.forEach(section => {
       const sectionTop = section.offsetTop;
@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Use debounced scroll listener
-  container.addEventListener('scroll', debounce(setActiveNavLink, 150));
+  // Use debounced scroll listener with smaller delay (reduced from 150ms to 50ms)
+  container.addEventListener('scroll', debounce(setActiveNavLink, 50));
 
   // Click listener for nav links
   navLinks.forEach(link => {
