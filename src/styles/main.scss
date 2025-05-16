@@ -423,6 +423,12 @@ button,
     scroll-snap-align: start;
     min-height: 100vh;
   }
+
+  #book-lesson,
+  #merch,
+  #contact {
+    min-height: 100svh;
+  }
   
   #navbar {
     width: 100%;
