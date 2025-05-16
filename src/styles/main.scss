@@ -429,6 +429,10 @@ button,
   #contact {
     min-height: 100svh;
   }
+
+  #contact {
+    min-height: 100dvh;
+  }
   
   #navbar {
     width: 100%;
@@ -550,13 +554,8 @@ button,
   }
   
   #contact {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; // Centers content vertically
-    
     .contact-content {
       width: 90%;
-      margin: 0 auto; // Centers horizontally
     }
     
     .contact-form {
