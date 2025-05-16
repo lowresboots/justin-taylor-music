@@ -550,8 +550,13 @@ button,
   }
   
   #contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; // Centers content vertically
+    
     .contact-content {
       width: 90%;
+      margin: 0 auto; // Centers horizontally
     }
     
     .contact-form {
