@@ -12,15 +12,33 @@ body {
   background-color: #f9f8f4;
 }
 
+// Add custom property for dynamic viewport height
+:root {
+  --vh: 100vh;
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --vh: 100dvh;
+  }
+}
+
 // Container with improved gradient fade mask
 .container {
   position: relative;
   width: 100%;
   max-width: 100%;
-  height: 100vh;
+  height: var(--vh); // Use custom property
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  
+  // Hide scrollbar on mobile
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE/Edge
+  &::-webkit-scrollbar {
+    display: none; // Chrome/Safari/Opera
+  }
   
   // Strengthened gradient fade mask
   &::before {
@@ -39,30 +57,8 @@ body {
                 rgba(249, 248, 244, 0) 100%);
     pointer-events: none;
     z-index: 998;
+    transition: opacity 0.3s;
   }
-  
-  // Webkit scrollbar styling
-  &::-webkit-scrollbar {
-    width: 12px;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: #f9f8f4;
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background: #111;
-    border-radius: 6px;
-    border: 3px solid #f9f8f4;
-  }
-  
-  &::-webkit-scrollbar-thumb:hover {
-    background: #333;
-  }
-  
-  // Firefox scrollbar
-  scrollbar-width: thin;
-  scrollbar-color: #111 #f9f8f4;
 }
 
 // Navbar
@@ -124,7 +120,7 @@ body {
 
 // Section styles
 .section {
-  min-height: 100vh;
+  min-height: var(--vh); // Use custom property
   scroll-snap-align: start;
   padding: 2rem;
   display: flex;
@@ -155,6 +151,31 @@ body {
   
   &:hover {
     background-color: #333;
+  }
+}
+
+// Remove focus outlines from buttons
+button,
+.book-now-btn,
+.shop-now-btn,
+.send-message-btn {
+  &:focus {
+    outline: none;
+  }
+}
+
+// Disable hover effects on touch devices
+@media (hover: none) {
+  .book-now-btn:hover,
+  .shop-now-btn:hover,
+  .send-message-btn:hover {
+    background-color: #111 !important;
+    opacity: 1 !important;
+  }
+  
+  // Add social links hover suppression
+  #hero .social-links a:hover {
+    opacity: 1 !important;
   }
 }
 
@@ -368,31 +389,6 @@ body {
   }
 }
 
-// Remove focus outlines from buttons
-button,
-.book-now-btn,
-.shop-now-btn,
-.send-message-btn {
-  &:focus {
-    outline: none;
-  }
-}
-
-// Disable hover effects on touch devices
-@media (hover: none) {
-  .book-now-btn:hover,
-  .shop-now-btn:hover,
-  .send-message-btn:hover {
-    background-color: #111 !important;
-    opacity: 1 !important;
-  }
-  
-  // Add social links hover suppression
-  #hero .social-links a:hover {
-    opacity: 1 !important;
-  }
-}
-
 // Mobile adjustments
 @media (max-width: 768px) {
   html, body {
@@ -400,38 +396,17 @@ button,
   }
   
   .container {
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    
-    // Hide scrollbar on mobile
-    scrollbar-width: none; // Firefox
-    -ms-overflow-style: none; // IE/Edge
-    &::-webkit-scrollbar {
-      display: none; // Chrome/Safari/Opera
-    }
+    // Height is already set with var(--vh)
     
     &::before {
       width: 100%;
       height: 90px;
-      transition: opacity 0.3s;
     }
   }
   
   .section {
     padding: 6rem 1.5rem 2rem;
-    scroll-snap-align: start;
-    min-height: 100vh;
-  }
-
-  #book-lesson,
-  #merch,
-  #contact {
-    min-height: 100svh;
-  }
-
-  #contact {
-    min-height: 100dvh;
+    // min-height is already set with var(--vh)
   }
   
   #navbar {
@@ -566,18 +541,6 @@ button,
           outline: 2px solid rgba(17, 17, 17, 0.5);
           outline-offset: -1px;
         }
-      }
-    }
-  }
-  
-  // Specific fix for Android Chrome viewport issues
-  @supports (-webkit-touch-callout: none) and (not (overflow:-webkit-marquee)) and (not (-ms-overflow-style:none)) {
-    #contact {
-      padding-top: 4rem; // Reduced top padding
-      justify-content: flex-start; // Start alignment instead of center
-      
-      .contact-content {
-        margin-top: 5rem; // Add margin to push content down appropriately
       }
     }
   }
