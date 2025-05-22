@@ -409,6 +409,11 @@ button,
     // min-height is already set with var(--vh)
   }
   
+  // Fix scroll snap dead zone for hero section on mobile
+  #hero.section {
+    height: var(--vh); // Force exact height for clean snapping on mobile
+  }
+  
   #navbar {
     width: 100%;
     padding: 1rem 0.5rem;
