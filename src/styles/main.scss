@@ -411,7 +411,7 @@ button,
   
   // Fix scroll snap dead zone for hero section on mobile
   #hero.section {
-    height: var(--vh); // Force exact height for clean snapping on mobile
+    min-height: var(--vh); // Ensure minimum height for clean snapping while allowing content overflow
   }
   
   #navbar {
