@@ -450,10 +450,10 @@ button,
       
       .logo {
         margin: 0;
-        margin-top: 1rem; // Minimal space between text and logo
+        margin-top: 1.2rem; // Slight increase for better spacing
         
         .guitar-logo {
-          height: 280px; // Reduced size to fit better in viewport
+          height: 320px; // Increased from 280px for better presence
         }
       }
       
@@ -462,13 +462,13 @@ button,
         margin-top: 0;
         
         .name-text {
-          font-size: 3.5rem; // Slightly smaller to fit better
+          font-size: 4rem; // Increased from 3.5rem for better impact
         }
         
         .music-text {
-          font-size: 1.2rem;
+          font-size: 1.4rem; // Increased from 1.2rem
           margin-left: 0;
-          letter-spacing: 0.2rem;
+          letter-spacing: 0.25rem; // Slightly more spacing
         }
       }
     }
@@ -476,11 +476,11 @@ button,
     .social-links {
       flex-wrap: nowrap !important;
       justify-content: center;
-      gap: 1rem;
+      gap: 1.2rem; // Slightly increased gap
       overflow-x: auto;
       padding: 0 1rem;
-      margin-top: 1rem;
-      margin-bottom: 2rem; // Reduced to fit in viewport
+      margin-top: 1.2rem; // Slight increase
+      margin-bottom: 2.2rem; // Slight increase while maintaining viewport fit
       
       scrollbar-width: none;
       -ms-overflow-style: none;
@@ -489,7 +489,7 @@ button,
       }
       
       a {
-        font-size: 2rem; // Slightly smaller icons
+        font-size: 2.3rem; // Increased from 2rem for better visibility
         flex-shrink: 0;
       }
     }
@@ -570,7 +570,7 @@ button,
   }
   
   #hero .logo-container .brand-text .name-text {
-    font-size: 3.2rem;
+    font-size: 3.6rem; // Increased from 3.2rem for extra small devices
   }
   
   .section {
