@@ -389,7 +389,7 @@ button,
   }
 }
 
-// Mobile adjustments - ENHANCED FOR HERO SECTION DEAD ZONE FIX
+// Mobile adjustments - CORRECTED HERO SECTION FIX
 @media (max-width: 768px) {
   html, body {
     overflow-x: hidden;
@@ -409,12 +409,14 @@ button,
     // min-height is already set with var(--vh)
   }
   
-  // CRITICAL FIX: Enhanced hero section mobile layout to eliminate dead zone
+  // CORRECTED FIX: Hero section mobile layout for proper snap behavior
   #hero.section {
-    min-height: var(--vh); // Ensure minimum height for clean snapping
-    padding-top: 7rem; // Increased padding to push content below navbar
-    padding-bottom: 2rem; // Ensure bottom spacing
-    justify-content: flex-start; // Align content to top instead of center
+    min-height: var(--vh); // Ensure full viewport height
+    padding: 0 1.5rem; // Remove top/bottom padding to let content use full height
+    justify-content: center; // Keep content centered vertically
+    
+    // Ensure content doesn't overflow and cause scroll issues
+    overflow: hidden;
   }
   
   #navbar {
@@ -443,15 +445,15 @@ button,
     .logo-container {
       flex-direction: column-reverse;
       align-items: center;
-      margin-top: 2rem; // Add top margin for better spacing
-      margin-bottom: 2rem; // Ensure bottom spacing
+      margin-top: 4rem; // Space for navbar but not excessive
+      margin-bottom: 1.5rem;
       
       .logo {
         margin: 0;
-        margin-top: 2rem; // More space between text and logo
+        margin-top: 1rem; // Minimal space between text and logo
         
         .guitar-logo {
-          height: 300px; // Slightly smaller for better fit
+          height: 280px; // Reduced size to fit better in viewport
         }
       }
       
@@ -460,13 +462,13 @@ button,
         margin-top: 0;
         
         .name-text {
-          font-size: 3.8rem; // Slightly smaller for better mobile fit
+          font-size: 3.5rem; // Slightly smaller to fit better
         }
         
         .music-text {
-          font-size: 1.3rem;
+          font-size: 1.2rem;
           margin-left: 0;
-          letter-spacing: 0.25rem;
+          letter-spacing: 0.2rem;
         }
       }
     }
@@ -474,11 +476,11 @@ button,
     .social-links {
       flex-wrap: nowrap !important;
       justify-content: center;
-      gap: 1.2rem;
+      gap: 1rem;
       overflow-x: auto;
       padding: 0 1rem;
-      margin-top: 1.5rem;
-      margin-bottom: 3rem; // Increased bottom margin
+      margin-top: 1rem;
+      margin-bottom: 2rem; // Reduced to fit in viewport
       
       scrollbar-width: none;
       -ms-overflow-style: none;
@@ -487,7 +489,7 @@ button,
       }
       
       a {
-        font-size: 2.2rem;
+        font-size: 2rem; // Slightly smaller icons
         flex-shrink: 0;
       }
     }
@@ -568,11 +570,16 @@ button,
   }
   
   #hero .logo-container .brand-text .name-text {
-    font-size: 3.5rem;
+    font-size: 3.2rem;
   }
   
   .section {
     padding-top: 5rem;
+  }
+  
+  // Keep hero section special padding
+  #hero.section {
+    padding: 0 1rem;
   }
   
   // Even smaller titles for tiny screens
