@@ -389,7 +389,7 @@ button,
   }
 }
 
-// Mobile adjustments
+// Mobile adjustments - ENHANCED FOR HERO SECTION DEAD ZONE FIX
 @media (max-width: 768px) {
   html, body {
     overflow-x: hidden;
@@ -409,9 +409,12 @@ button,
     // min-height is already set with var(--vh)
   }
   
-  // Fix scroll snap dead zone for hero section on mobile
+  // CRITICAL FIX: Enhanced hero section mobile layout to eliminate dead zone
   #hero.section {
-    min-height: var(--vh); // Ensure minimum height for clean snapping while allowing content overflow
+    min-height: var(--vh); // Ensure minimum height for clean snapping
+    padding-top: 7rem; // Increased padding to push content below navbar
+    padding-bottom: 2rem; // Ensure bottom spacing
+    justify-content: flex-start; // Align content to top instead of center
   }
   
   #navbar {
@@ -440,14 +443,15 @@ button,
     .logo-container {
       flex-direction: column-reverse;
       align-items: center;
-      margin-top: 0;
+      margin-top: 2rem; // Add top margin for better spacing
+      margin-bottom: 2rem; // Ensure bottom spacing
       
       .logo {
         margin: 0;
-        margin-top: 1.5rem;
+        margin-top: 2rem; // More space between text and logo
         
         .guitar-logo {
-          height: 320px;
+          height: 300px; // Slightly smaller for better fit
         }
       }
       
@@ -456,7 +460,7 @@ button,
         margin-top: 0;
         
         .name-text {
-          font-size: 4rem;
+          font-size: 3.8rem; // Slightly smaller for better mobile fit
         }
         
         .music-text {
@@ -473,7 +477,8 @@ button,
       gap: 1.2rem;
       overflow-x: auto;
       padding: 0 1rem;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
+      margin-bottom: 3rem; // Increased bottom margin
       
       scrollbar-width: none;
       -ms-overflow-style: none;
